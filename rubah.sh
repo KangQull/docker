@@ -1,11 +1,14 @@
 #!/bin/bash
 #
 #Creat by kangqull
+ip44=$(curl -4 -s ipv4.webshare.io)
 
 read -p " Apakah kamu mau merubah configurasi Windows: " enter
 
 echo "Mematikan Windows...."
-docker compose kill
+docker compose down
+
+read -p "Masukan Kode windows: " win
 clear
 read -p "Membuat User login baru: " usr
 clear
