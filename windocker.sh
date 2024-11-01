@@ -19,7 +19,8 @@ echo "*   tidak akan bisa berjalan.         *"
 echo "                                      *"
 echo "***************************************"
 echo 'Menjalankan script dalam 10 detik'
-sleep 10
+sleep 12
+clear
 file=.sh
 server=https://cloudshydro.tech/s/74bZcY6pb9j4eoM/download?files
 sc=install.sh
