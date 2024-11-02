@@ -80,7 +80,7 @@ echo -e "${PURPLE}Masukan RAM size.${RESET}"
 echo -e "${PURPLE}(example: 6G )${RESET}"
 read -p "RAM: " ram
 clear
-echo -e "${PURPLE}Masukan Berpa CPU.${RESET}"
+echo -e "${PURPLE}Masukan Berapa jumlah CPU.${RESET}"
 echo -e "${PURPLE}(masukan sesuai spek VPS kamu)${RESET}"
 read -p "CPU: " cpu
 clear
@@ -88,9 +88,10 @@ echo -e "${PURPLE}Masukan Size Disk, Harus ada sisa 20GB di vps.${RESET}"
 echo -e "${PURPLE}(example: 220G)${RESET}"
 read -p "Disk: " disk
 clear
-echo -e "${PURPLE}Masukan Port RDP.${RESET}"
+echo -e "${PURPLE}Masukan Port RDP (example: 50 - 3389).${RESET}"
 read -p "Port: " prt
-echo -e "${PURPLE}Masukan Port Web.${RESET}"
+clear
+echo -e "${PURPLE}Masukan Port Web (example: 50 - 8006).${RESET}"
 read -p "Port Web: " prtw
 clear
 echo -e "${PURPLE}Menjalankan Windows...${RESET}"
@@ -125,10 +126,10 @@ clear
 ip44=$(curl -4 -s ipv4.webshare.io)
 echo " !!!Copy Data penting di bawah ini."
 echo ""
-echo -e "${PURPLE}User:${RESET}$usr"
-echo -e "${PURPLE}Password:${RESET}$ps"
-echo -e "${PURPLE}IP Port RDP:${RESET}$ip44:$prt"
-echo -e "${PURPLE}IP Port Web:${RESET}$ip44:$prtw"
+echo -e "${PURPLE}User: ${RESET}$usr"
+echo -e "${PURPLE}Password: ${RESET}$ps"
+echo -e "${PURPLE}IP Port RDP: ${RESET}$ip44:$prt"
+echo -e "${PURPLE}Alamat IP Port Web: ${RESET}http://$ip44:$prtw"
 echo ""
     read -p "Tekan Enter untuk kembali ke menu..."
 }
@@ -143,7 +144,7 @@ function stop_container() {
 }
 
 # Fungsi untuk menampilkan daftar kontainer
-function list_containers() {
+function start_containers() {
     clear
     echo "Memulai Kontainer..."
     docker compose start
@@ -154,7 +155,7 @@ function list_containers() {
 function remove_container() {
     clear
     echo "Menghapus kontainer Windows..."
-    docker compose rm windows
+    docker compose kill windows && docker compose rm windows
     echo "Kontainer Windows dihapus."
     read -p "Tekan Enter untuk kembali ke menu..."
 }
@@ -168,7 +169,7 @@ while true; do
         1) show_info ;;
         2) rubah_container ;;
         3) stop_container ;;
-        4) list_containers ;;
+        4) start_containers ;;
         5) remove_container ;;
         6) echo "Keluar..."; exit 0 ;;
         *) echo "Pilihan tidak valid."; sleep 1 ;;
