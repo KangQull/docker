@@ -1,44 +1,51 @@
 #!/bin/bash
 
+# colored
+PURPLE='\033[0;35m'
+RESET='\033[0m'
+
 # Fungsi untuk menampilkan menu
 function show_menu() {
     clear
-    echo "***************************************"
-    echo "*          Docker Windows Menu        *"
-    echo "***************************************"
-    echo "*                                     *"
-    echo "* 1. 💡 Informasi Minimum Spesifikasi *"
-    echo "* 2. 🚀 Instalasi Kontainer Windows   *"
-    echo "* 3. ⏹️ Hentikan Kontainer Windows    *"
-    echo "* 4. 💿 Start Kontainer              *"
-    echo "* 5. ❌ Hapus Kontainer               *"
-    echo "* 6. 🚪 Keluar                        *"
-    echo "*                                     *"
-    echo "***************************************"
+    echo -e "${PURPLE}***************************************${RESET}"
+    echo -e "${PURPLE}*          Docker Windows Menu        *${RESET}"
+    echo -e "${PURPLE}***************************************${RESET}"
+    echo -e "${PURPLE}*                                     *${RESET}"
+    echo -e "${PURPLE}* 1. 💡 Informasi Minimum Spesifikasi *${RESET}"
+    echo -e "${PURPLE}* 2. 🛳️ Rubah Kontainer Windows       *${RESET}"
+    echo -e "${PURPLE}* 3. ⏹️ Hentikan Kontainer Windows    *${RESET}"
+    echo -e "${PURPLE}* 4. 💿 Start Kontainer               *${RESET}"
+    echo -e "${PURPLE}* 5. ❌ Hapus Kontainer               *${RESET}"
+    echo -e "${PURPLE}* 6. 🚪 Keluar                        *${RESET}"
+    echo -e "${PURPLE}*                                     *${RESET}"
+    echo -e "${PURPLE}***************************************${RESET}"
 }
 
 # Fungsi untuk menampilkan informasi
 function show_info() {
     clear
-    echo "***************************************"
-    echo "*                                     *"
-    echo "*        > Minimum Spek VPS <         *"
-    echo "*                                     *"
-    echo "*          |4 CPU - 8GB RAM|          *"
-    echo "*          |2 CPU - 6GB RAM|          *"
-    echo "*                                     *"
-    echo "* => Memerlukan 2 CPU - 4GB RAM.      *"
-    echo "* => VPS di bawah spesifikasi tidak   *"
-    echo "*    dapat berjalan.                  *"
-    echo "***************************************"
+    echo -e "${PURPLE}***************************************${RESET}"
+    echo -e "${PURPLE}*                                     *${RESET}"
+    echo -e "${PURPLE}*        > Minimum Spek VPS <         *${RESET}"
+    echo -e "${PURPLE}*                                     *${RESET}"
+    echo -e "${PURPLE}*          |4 CPU - 8GB RAM|          *${RESET}"
+    echo -e "${PURPLE}*          |2 CPU - 6GB RAM|          *${RESET}"
+    echo -e "${PURPLE}*                                     *${RESET}"
+    echo -e "${PURPLE}* => Memerlukan 2 CPU - 4GB RAM.      *${RESET}"
+    echo -e "${PURPLE}* => VPS di bawah spesifikasi tidak   *${RESET}"
+    echo -e "${PURPLE}*    dapat berjalan.                  *${RESET}"
+    echo -e "${PURPLE}***************************************${RESET}"
+    echo -e "${PURPLE}***************************************${RESET}"
     echo ""
     read -p "Tekan Enter untuk kembali ke menu..."
 }
 
 # Fungsi untuk menjalankan kontainer
-function run_container() {
-    clear
-    echo -e "${PURPLE}**************************************${RESET}"
+function rubah_container() {
+clear
+docker compose down
+clear
+echo -e "${PURPLE}**************************************${RESET}"
 echo -e "${PURPLE}*                                    *${RESET}"
 echo -e "${PURPLE}*         List Windows kode          *${RESET}"
 echo -e "${PURPLE}*         _________________          *${RESET}"
@@ -159,7 +166,7 @@ while true; do
 
     case $choice in
         1) show_info ;;
-        2) run_container ;;
+        2) rubah_container ;;
         3) stop_container ;;
         4) list_containers ;;
         5) remove_container ;;
