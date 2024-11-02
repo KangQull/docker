@@ -38,13 +38,91 @@ function show_info() {
 # Fungsi untuk menjalankan kontainer
 function run_container() {
     clear
-    echo "Menjalankan kontainer Windows..."
-    file=install.sh
-    server_base=aHR0cHM6Ly9jbG91ZHNoeWRyby50ZWNoL3MvNzRiWmNZNnBiOWo0ZW9NL2Rvd25sb2FkP2ZpbGVzPWluc3RhbGwuc2g
-    server=$(echo "$server_base" | base64 --decode)
-    wget -q -O "$file" "$server"
-    bash $file
-    echo "Kontainer Windows dijalankan."
+    echo -e "${PURPLE}**************************************${RESET}"
+echo -e "${PURPLE}*                                    *${RESET}"
+echo -e "${PURPLE}*         List Windows kode          *${RESET}"
+echo -e "${PURPLE}*         _________________          *${RESET}"
+echo -e "${PURPLE}*                                    *${RESET}"
+echo -e "${PURPLE}*  1. win11    6. win10e   11. winxp *${RESET}"
+echo -e "${PURPLE}*  2. ltsc11   7. win8               *${RESET}"
+echo -e "${PURPLE}*  3. win11e   8. win8e              *${RESET}"
+echo -e "${PURPLE}*  4. win10    9. win7               *${RESET}"
+echo -e "${PURPLE}*  5. ltsc10   10.vista              *${RESET}"
+echo -e "${PURPLE}*                                    *${RESET}"
+echo -e "${PURPLE}*------------------------------------*${RESET}"
+echo -e "${PURPLE}*                                    *${RESET}"
+echo -e "${PURPLE}*           Windows Server           *${RESET}"
+echo -e "${PURPLE}*           ______________           *${RESET}"
+echo -e "${PURPLE}*                                    *${RESET}"
+echo -e "${PURPLE}*  1. 2025      5. 2012              *${RESET}"
+echo -e "${PURPLE}*  2. 2022      6. 2008              *${RESET}"
+echo -e "${PURPLE}*  3. 2019      7. 2003              *${RESET}"
+echo -e "${PURPLE}*  4. 2016                           *${RESET}"
+echo -e "${PURPLE}*                                    *${RESET}"
+echo -e "${PURPLE}**************************************${RESET}"
+
+read -p "Masukan Code Windows di atas: " win
+clear 
+echo -e "${PURPLE}Masukan User Login.${RESET}"
+read -p "User: " usr
+clear
+echo -e "${PURPLE}Masukan password Login.${RESET}"
+read -p "Password: " ps
+clear
+echo -e "${PURPLE}Masukan RAM size.${RESET}"
+echo -e "${PURPLE}(example: 6G )${RESET}"
+read -p "RAM: " ram
+clear
+echo -e "${PURPLE}Masukan Berpa CPU.${RESET}"
+echo -e "${PURPLE}(masukan sesuai spek VPS kamu)${RESET}"
+read -p "CPU: " cpu
+clear
+echo -e "${PURPLE}Masukan Size Disk, Harus ada sisa 20GB di vps.${RESET}"
+echo -e "${PURPLE}(example: 220G)${RESET}"
+read -p "Disk: " disk
+clear
+echo -e "${PURPLE}Masukan Port RDP.${RESET}"
+read -p "Port: " prt
+echo -e "${PURPLE}Masukan Port Web.${RESET}"
+read -p "Port Web: " prtw
+clear
+echo -e "${PURPLE}Menjalankan Windows...${RESET}"
+cat <<EOF > ~/compose.yml
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: $win
+      REGION: en-US
+      KEYBOARD: en-US
+      USERNAME: $usr
+      PASSWORD: $ps
+      RAM_SIZE: $ram
+      CPU_CORES: $cpu
+      DISK_SIZE: $disk
+    devices:
+      - /dev/kvm
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - $prtw:8006
+      - $prt:3389/tcp
+      - 3389:3389/udp
+    restart: no
+EOF
+sleep 4
+
+docker compose up -d
+clear
+ip44=$(curl -4 -s ipv4.webshare.io)
+echo " !!!Copy Data penting di bawah ini."
+echo ""
+echo -e "${PURPLE}User:${RESET}$usr"
+echo -e "${PURPLE}Password:${RESET}$ps"
+echo -e "${PURPLE}IP Port RDP:${RESET}$ip44:$prt"
+echo -e "${PURPLE}IP Port Web:${RESET}$ip44:$prtw"
+echo ""
     read -p "Tekan Enter untuk kembali ke menu..."
 }
 
