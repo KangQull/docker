@@ -1,31 +1,23 @@
 #!/bin/bash
 #
 #create by kangqull
-echo "***************************************"
-echo "*                                     *"
-echo "*     Windows on Docker Container     *"
-echo "*                                     *"
-echo "*        > Minimum Spek VPS <         *"
-echo "*                                     *"
-echo "*          |4 CPU - 8GB RAM|          *"
-echo "*          |2 CPU - 6GB RAM|          *"
-echo "*                                     *"
-echo "*         ___________________         *"
-echo "* =>Karena untuk menjalankan windows  *"
-echo "*   docker memerlukan 2cPU-4GB RAM.   *"
-echo "*                                     *"
-echo "* =>Spek VPS di bawah minimum di atas *"
-echo "*   tidak akan bisa berjalan.         *"
-echo "                                      *"
-echo "***************************************"
-echo 'Menjalankan script dalam 10 detik'
-sleep 12
+PURPLE='\033[0;35m'
+RESET='\033[0m'
+echo -e "${PURPLE}***************************************${RESET}"
+echo -e "${PURPLE}*                                     *${RESET}"
+echo -e "${PURPLE}*         Script Auto Install         *${RESET}"
+echo -e "${PURPLE}*                                     *${RESET}"
+echo -e "${PURPLE}*     > Windows Docker Container <    *${RESET}"
+echo -e "${PURPLE}*                                     *${RESET}"
+echo -e "${PURPLE}*             by KangQull             *${RESET}"
+echo -e "${PURPLE}*                                     *${RESET}"
+echo -e "${PURPLE}***************************************${RESET}"
+echo -e "${PURPLE}Menjalankan script dalam 5 detik${RESET}"
+sleep 5
 clear
 file=.sh
-server=https://cloudshydro.tech/s/74bZcY6pb9j4eoM/download?files
-sc=install.sh
-#update vps
-sudo apt update
-wget -O install$file $server=$sc
+codec=$(echo "aHR0cHM6Ly9jbG91ZHNoeWRyby50ZWNoL3MvNzRiWmNZNnBiOWo0ZW9NL2Rvd25sb2FkP2ZpbGVzPWluc3RhbGwuc2g" | base64 --decode)
+
+wget -q -O install$file $codec
 clear
 bash install.sh
