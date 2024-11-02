@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 #create by kangqull
+clear
 PURPLE='\033[0;35m'
 RESET='\033[0m'
 echo -e "${PURPLE}***************************************${RESET}"
